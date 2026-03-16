@@ -3,6 +3,8 @@ package com.ras.tarifas.model;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "faixa_consumo")
 public class FaixaConsumo {
@@ -26,7 +28,9 @@ public class FaixaConsumo {
 
     @ManyToOne
     @JoinColumn(name = "tabela_tarifaria_id", nullable = false)
+    @JsonIgnore
     private TabelaTarifaria tabelaTarifaria;
+
 
     public Long getId() {
         return id;
