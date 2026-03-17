@@ -1,19 +1,34 @@
 # 💧 API de Tabela Tarifária de Água - Desafio Técnico
 
-[cite_start]Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifárias de água e calcular progressivamente o valor da conta com base no consumo e na categoria do cliente [cite: 3-4, 63]. O motor de cálculo garante que o cliente não seja cobrado por volume não consumido na faixa inicial.
+Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifárias de água e calcular progressivamente o valor da conta com base no consumo e na categoria do cliente. O motor de cálculo garante que o cliente não seja cobrado por volume não consumido na faixa inicial.
 
 ## 🛠️ Pré-requisitos
-[cite_start]Certifique-se de ter instalado em sua máquina[cite: 147]:
-* [cite_start]**Java 17** (ou superior) [cite: 6]
+Certifique-se de ter instalado em sua máquina:
+* **Java 17** (ou superior)
 * **Maven**
-* [cite_start]**PostgreSQL** (versão 15 ou compatível) [cite: 8]
+* **PostgreSQL** (versão 15 ou compatível)
 
 ## 🗄️ Configuração do Banco de Dados
 1. Abra sua ferramenta de preferência para o PostgreSQL (ex: pgAdmin).
 2. Crie um banco de dados vazio com o nome: `gsan_tarifas`.
-3. [cite_start]No projeto, abra o arquivo `src/main/resources/application.properties` e ajuste o usuário e a senha do banco de acordo com a sua máquina local[cite: 148]:
+3. No projeto, abra o arquivo `src/main/resources/application.properties` e ajuste o usuário e a senha do banco de acordo com a sua máquina local:
    ```properties
    spring.datasource.url=jdbc:postgresql://localhost:5432/gsan_tarifas
    spring.datasource.username=postgres
    spring.datasource.password=sua_senha_aqui
+(O Spring Boot com Hibernate JPA está configurado com update, então as tabelas serão criadas automaticamente ao rodar o projeto pela primeira vez).
 
+🚀 Como Executar e Testar a Aplicação
+Clone o repositório em sua máquina.
+
+Abra a pasta raiz do projeto na sua IDE (VS Code, IntelliJ, etc.).
+
+Execute a classe principal TarifasApplication.java ou rode o comando maven: ./mvnw spring-boot:run.
+
+A API estará disponível no endereço: http://localhost:8080.
+
+📚 Documentação Interativa (Swagger)
+A API possui documentação automática e interativa gerada pelo Swagger (OpenAPI).
+Após iniciar a aplicação, você pode visualizar e testar todos os endpoints diretamente pelo navegador, sem necessidade de ferramentas externas, acessando o link abaixo:
+
+👉 http://localhost:8080/swagger-ui/index.html
