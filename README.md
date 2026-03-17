@@ -3,7 +3,7 @@
 Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifárias de água e calcular progressivamente o valor da conta com base no consumo e na categoria do cliente.
 
 ## 🛠️ Pré-requisitos
-Certifique-se de ter instalado em sua máquina:
+
 * **Java 17** (ou superior)
 * **Maven**
 * **PostgreSQL** (versão 15 ou compatível)
