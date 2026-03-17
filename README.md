@@ -6,7 +6,7 @@ Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifár
 
 * **Java 17** (ou superior)
 * **Maven**
-* **PostgreSQL** (versão 15 ou compatível)
+* **PostgreSQL**
 
 ## 🗄️ Configuração do Banco de Dados
 1. Abra o pgAdmin (ou sua ferramenta de preferência para o PostgreSQL).
