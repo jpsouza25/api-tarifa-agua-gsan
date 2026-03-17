@@ -36,6 +36,3 @@ Após iniciar a aplicação, você pode visualizar e testar todos os endpoints d
 
 ---
 
-
-}
-```
