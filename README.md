@@ -1,6 +1,6 @@
 # 💧 API de Tabela Tarifária de Água - Desafio Técnico
 
-Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifárias de água e calcular progressivamente o valor da conta com base no consumo e na categoria do cliente, garantindo que o cliente não seja cobrado por volume não consumido na faixa inicial.
+Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifárias de água e calcular progressivamente o valor da conta com base no consumo e na categoria do cliente.
 
 ## 🛠️ Pré-requisitos
 Certifique-se de ter instalado em sua máquina:
