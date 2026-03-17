@@ -15,4 +15,4 @@ Esta é uma API REST desenvolvida em Spring Boot para gerenciar tabelas tarifár
    ```properties
    spring.datasource.url=jdbc:postgresql://localhost:5432/gsan_tarifas
    spring.datasource.username=postgres
-   spring.datasource.password=sua_senha_aqui
+   spring.datasource.password=senha
