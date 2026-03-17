@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,9 +21,11 @@ public class CalculoService {
     private TabelaTarifariaRepository tabelaRepository;
 
     public CalculoResponseDTO calcularTarifa(CalculoRequestDTO dto) {
-
-        TabelaTarifaria tabela = tabelaRepository.findById(dto.getTabelaId())
-                .orElseThrow(() -> new RuntimeException("Tabela não encontrada!"));
+        
+        TabelaTarifaria tabela = tabelaRepository.findFirstByOrderByIdDesc();
+        if (tabela == null) {
+            throw new RuntimeException("Nenhuma tabela encontrada no sistema!");
+        }
 
         List<FaixaConsumo> faixasDaCategoria = tabela.getFaixas().stream()
                 .filter(faixa -> faixa.getCategoria() == dto.getCategoria())
@@ -31,28 +34,44 @@ public class CalculoService {
 
         BigDecimal valorTotal = BigDecimal.ZERO;
         int consumoRestante = dto.getConsumo();
+        
+        List<CalculoResponseDTO.DetalhamentoDTO> listaDetalhamento = new ArrayList<>();
 
         for (FaixaConsumo faixa : faixasDaCategoria) {
-
-            if (consumoRestante <= 0) {
-                break;
-            }
+            if (consumoRestante <= 0) break;
 
             int capacidadeDaFaixa;
             if (faixa.getInicio() == 0) {
-                capacidadeDaFaixa = faixa.getFim();
+                capacidadeDaFaixa = faixa.getFim(); 
             } else {
                 capacidadeDaFaixa = faixa.getFim() - faixa.getInicio() + 1;
             }
 
             int volumeFaturadoNaFaixa = Math.min(consumoRestante, capacidadeDaFaixa);
-            BigDecimal valorDestaFaixa = faixa.getValorUnitario()
-                    .multiply(new BigDecimal(volumeFaturadoNaFaixa));
+            BigDecimal valorDestaFaixa = faixa.getValorUnitario().multiply(new BigDecimal(volumeFaturadoNaFaixa));
 
             valorTotal = valorTotal.add(valorDestaFaixa);
-
             consumoRestante -= volumeFaturadoNaFaixa;
+
+            CalculoResponseDTO.FaixaDTO faixaDTO = new CalculoResponseDTO.FaixaDTO();
+            faixaDTO.setInicio(faixa.getInicio());
+            faixaDTO.setFim(faixa.getFim());
+
+            CalculoResponseDTO.DetalhamentoDTO detalhe = new CalculoResponseDTO.DetalhamentoDTO();
+            detalhe.setFaixa(faixaDTO);
+            detalhe.setM3Cobrados(volumeFaturadoNaFaixa);
+            detalhe.setValorUnitario(faixa.getValorUnitario());
+            detalhe.setSubtotal(valorDestaFaixa);
+
+            listaDetalhamento.add(detalhe);
         }
-        return new CalculoResponseDTO(valorTotal);
+
+        CalculoResponseDTO response = new CalculoResponseDTO();
+        response.setCategoria(dto.getCategoria().name());
+        response.setConsumoTotal(dto.getConsumo());
+        response.setValorTotal(valorTotal);
+        response.setDetalhamento(listaDetalhamento);
+
+        return response;
     }
 }

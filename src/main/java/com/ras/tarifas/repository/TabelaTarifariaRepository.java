@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TabelaTarifariaRepository extends JpaRepository<TabelaTarifaria, Long> {
-
+    
+    TabelaTarifaria findFirstByOrderByIdDesc(); 
 }
