@@ -22,7 +22,7 @@ spring.datasource.password=senha
 *(O Spring Boot com Hibernate JPA está configurado com `update`, então as tabelas serão criadas automaticamente ao rodar o projeto pela primeira vez).*
 
 ## 🚀 Como Executar e Testar a Aplicação
-1. Clone o repositório em sua máquina.
+1. Clone o repositório: git clone https://github.com/jpsouza25/api-tarifa-agua-gsan.git
 2. Abra a pasta raiz do projeto na sua IDE.
 3. Execute a classe principal `TarifasApplication.java` ou rode o comando maven: `./mvnw spring-boot:run`.
 4. A API estará disponível no endereço: `http://localhost:8080`.
